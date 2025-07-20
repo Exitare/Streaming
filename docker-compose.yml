@@ -1,0 +1,42 @@
+services:
+  quart-backend:
+    build:
+      context: ./quart-backend
+    ports:
+      - "8000:8000"
+    command: ["python", "app.py"]
+    volumes:
+      - hls-data:/tmp/hls
+    networks:
+      - appnet
+
+  nginx-frontend:
+    image: nginx:latest
+    volumes:
+      - ./nginx-frontend/default.conf:/etc/nginx/conf.d/default.conf
+      - ./static:/usr/share/nginx/html:ro
+      - hls-data:/tmp/hls
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - quart-backend
+    networks:
+      - appnet
+
+  nginx-rtmp:
+    image: tiangolo/nginx-rtmp
+    volumes:
+      - ./nginx-rtmp/nginx.conf:/etc/nginx/nginx.conf:ro
+      - hls-data:/tmp/hls
+    ports:
+      - "1935:1935"  # RTMP
+      - "8080:8080"  # HLS HTTP
+    networks:
+      - appnet
+
+volumes:
+  hls-data:
+
+networks:
+  appnet:
