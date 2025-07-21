@@ -4,7 +4,6 @@ services:
       context: ./quart-backend
     ports:
       - "8000:8000"
-    command: ["python", "app.py"]
     volumes:
       - hls-data:/tmp/hls
     networks:

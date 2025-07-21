@@ -77,5 +77,5 @@ async def signup():
 async def logout():
     from quart_auth import logout_user
     logout_user()
-    await flash("You have been logged out.", "success")
+    await flash("You have been logged out.", "global-success")
     return redirect(url_for('auth.login'))
