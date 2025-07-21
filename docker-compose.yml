@@ -3,7 +3,7 @@ services:
     build:
       context: ./quart-backend
     ports:
-      - "50000:8000"
+      - "55000:8000"
     volumes:
       - hls-data:/tmp/hls
     networks:
@@ -16,7 +16,7 @@ services:
       - ./static:/usr/share/nginx/html:ro
       - hls-data:/tmp/hls
     ports:
-      - "50002:80"
+      - "55002:80"
     depends_on:
       - quart-backend
     networks:
@@ -29,7 +29,7 @@ services:
       - hls-data:/tmp/hls
     ports:
       - "1935:1935"  # RTMP
-      - "50001:8080"  # HLS HTTP
+      - "55001:8080"  # HLS HTTP
     networks:
       - appnet
 
