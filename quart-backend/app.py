@@ -1,8 +1,24 @@
 from quart import Quart, jsonify, request, render_template
+from quart_auth import current_user, QuartAuth
 import os
+from src.routes.auth import auth_bp
+from src.db import init_db
 
 app = Quart(__name__)
+app.secret_key = 'super-secret-key'
 
+QuartAuth(app)
+
+# add the auth blueprint
+app.register_blueprint(auth_bp, url_prefix='/auth')
+
+@app.context_processor
+async def inject_user():
+    return {"current_user": current_user}
+
+@app.before_serving
+async def startup():
+    await init_db()
 
 @app.route("/api/videos")
 async def videos():

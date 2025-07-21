@@ -19,9 +19,9 @@ def restart_server():
     start_server()
 
 class ReloadHandler(FileSystemEventHandler):
-    def on_any_event(self, event):
-        if event.src_path.endswith(('.html', '.css', '.js', '.py')):
-            print(f"Change detected in {event.src_path}, restarting server...")
+    def on_modified(self, event):
+        if not event.is_directory and event.src_path.endswith(('.html', '.css', '.js', '.py')):
+            print(f"[Reload] Modified: {event.src_path}")
             restart_server()
 
 if __name__ == "__main__":
