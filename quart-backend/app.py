@@ -1,7 +1,7 @@
 from quart import Quart, jsonify, request, render_template
 from quart_auth import current_user, QuartAuth
 import os
-from src.routes.auth import auth_bp
+from src.routes import auth_bp, dashboard_bp
 from src.db import init_db
 
 app = Quart(__name__)
@@ -11,6 +11,7 @@ QuartAuth(app)
 
 # add the auth blueprint
 app.register_blueprint(auth_bp, url_prefix='/auth')
+app.register_blueprint(dashboard_bp, url_prefix='/dashboard')
 
 @app.context_processor
 async def inject_user():

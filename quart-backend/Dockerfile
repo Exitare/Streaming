@@ -1,5 +1,5 @@
 FROM python:3.11-slim
-
+ENV PYTHONUNBUFFERED=1
 # Set working directory
 WORKDIR /app
 
@@ -13,4 +13,4 @@ COPY . .
 EXPOSE 8000
 
 # Run app
-CMD ["hypercorn", "app:app", "--bind", "0.0.0.0:8000", "--reload"]
+CMD ["python", "reload_watcher.py"]
