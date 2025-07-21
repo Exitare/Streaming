@@ -3,7 +3,7 @@ services:
     build:
       context: ./quart-backend
     ports:
-      - "8000:8000"
+      - "50000:8000"
     volumes:
       - hls-data:/tmp/hls
     networks:
@@ -29,7 +29,7 @@ services:
       - hls-data:/tmp/hls
     ports:
       - "1935:1935"  # RTMP
-      - "8080:8080"  # HLS HTTP
+      - "50001:8080"  # HLS HTTP
     networks:
       - appnet
 
