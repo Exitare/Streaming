@@ -9,19 +9,6 @@ services:
     networks:
       - appnet
 
-  nginx-frontend:
-    image: nginx:latest
-    volumes:
-      - ./nginx-frontend/default.conf:/etc/nginx/conf.d/default.conf
-      - ./static:/usr/share/nginx/html:ro
-      - hls-data:/tmp/hls
-    ports:
-      - "55002:80"
-    depends_on:
-      - quart-backend
-    networks:
-      - appnet
-
   nginx-rtmp:
     image: tiangolo/nginx-rtmp
     volumes:
