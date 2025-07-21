@@ -16,7 +16,7 @@ services:
       - ./static:/usr/share/nginx/html:ro
       - hls-data:/tmp/hls
     ports:
-      - "80:80"
+      - "50002:80"
     depends_on:
       - quart-backend
     networks:
