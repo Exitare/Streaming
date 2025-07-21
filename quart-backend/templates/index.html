@@ -57,7 +57,7 @@
                     hls.attachMedia(video);
                     hls.on(Hls.Events.MANIFEST_PARSED, () => {
                         video.play();
-                        status.textContent = "🔴 Live stream loaded";
+                        status.textContent = "🟢 Live stream loaded";
                     });
                     hls.on(Hls.Events.ERROR, () => {
                         status.textContent = "⚠️ Error loading stream";
@@ -66,7 +66,7 @@
                     video.src = streamUrl;
                     video.addEventListener("loadedmetadata", () => {
                         video.play();
-                        status.textContent = "🔴 Live stream loaded (native)";
+                        status.textContent = "🟢 Live stream loaded (native)";
                     });
                 } else {
                     status.textContent = "❌ HLS not supported";
